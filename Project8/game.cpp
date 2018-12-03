@@ -1,3 +1,8 @@
+/************************************************
+ * Filename: game.cpp
+ * Desc: Implementation file for game.h
+ ************************************************/
+
 #include "game.h"
 
 Game::Game(int winWidth, int winHeight) {
