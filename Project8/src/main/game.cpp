@@ -8,6 +8,8 @@
 Game::Game(int winWidth, int winHeight) {
 	this->windowWidth = winWidth;
 	this->windowHeight = winHeight;
+
+	this->state = menu;
 }
 
 /*************************** OpenGL Utilities *************************************/
@@ -22,10 +24,29 @@ void framebufferSizeCallback(GLFWwindow* window, int width, int height) {
 
 GLFWwindow* Game::getWindow() { return this->window; }
 
+Game::STATE Game::getState() { return this->state; }
+void Game::setState(Game::STATE state) { this->state = state; }
+
 int Game::getWindowWidth() { return this->windowWidth; }
 int Game::getWindowHeight() { return this->windowHeight; }
 
 /**********************************************************************************/
+
+void Game::render() {
+	glColor3f(0.f, 0.f, 0.f);
+
+	p.render();
+}
+
+void Game::tick() {
+	p.tick();
+}
+
+void Game::keyInput() {
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+		glfwSetWindowShouldClose(window, true);
+	}
+}
 
 void Game::runGameLoop() {
 	while (!glfwWindowShouldClose(window)) {
@@ -33,6 +54,12 @@ void Game::runGameLoop() {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glMatrixMode(GL_MODELVIEW);
+
+		keyInput();
+
+		render();
+
+		tick();
 
 		glfwSwapBuffers(this->window);
 		glfwPollEvents();
