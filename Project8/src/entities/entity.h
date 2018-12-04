@@ -3,14 +3,16 @@
 #include <string>
 #include <GLFW/glfw3.h>
 #include "utilities/shapes.h"
+#include "entityIDs.h"
 
 class Entity {
 	protected: 
 		std::string name;
+		ENTITY_ID id;
 
-		int x, y;
-		int velX, velY;
-		int width, height;
+		float x, y;
+		float velX, velY;
+		float width, height;
 
 		Shapes shape;
 
@@ -19,18 +21,18 @@ class Entity {
 		virtual void tick() {}
 
 		/********************** Getters and Setters***********************/
-		int getX() { return this->x; }
-		int getY() { return this->y; }
-		int getVelX() { return this->velX; }
-		int getVelY() { return this->velY; }
-		int getWidth() { return this->width; }
-		int getHeight() { return this->height; }
+		float getX() { return this->x; }
+		float getY() { return this->y; }
+		float getVelX() { return this->velX; }
+		float getVelY() { return this->velY; }
+		float getWidth() { return this->width; }
+		float getHeight() { return this->height; }
 
-		void setX(int x) { this->x = x; }
-		void setY(int y) { this->y = y; }
-		void setVelX(int velX) { this->velX = velX; }
-		void setVelY(int velY) { this->velY = velY; }
-		void setWidth(int width) { this->width = width; }
-		void setHeight(int height) { this->height = height; }
+		void setX(float x) { this->x = x; }
+		void setY(float y) { this->y = y; }
+		void setVelX(float velX) { this->velX = velX; }
+		void setVelY(float velY) { this->velY = velY; }
+		void setWidth(float width) { this->width = width; }
+		void setHeight(float height) { this->height = height; }
 		/*****************************************************************/
 };

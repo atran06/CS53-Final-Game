@@ -5,6 +5,12 @@
 
 #include "game.h"
 
+double Game::mouseX;
+double Game::mouseY;
+
+int Game::leftClick;
+int Game::rightClick;
+
 Game::Game(int winWidth, int winHeight) {
 	this->windowWidth = winWidth;
 	this->windowHeight = winHeight;
@@ -20,6 +26,7 @@ void framebufferSizeCallback(GLFWwindow* window, int width, int height) {
 
 /**********************************************************************************/
 
+
 /************************* Getters and Setters ************************************/
 
 GLFWwindow* Game::getWindow() { return this->window; }
@@ -32,6 +39,41 @@ int Game::getWindowHeight() { return this->windowHeight; }
 
 /**********************************************************************************/
 
+
+/******************************* Inputs *******************************************/
+
+void Game::keyInput() {
+	/* Escape to close window */
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+		glfwSetWindowShouldClose(window, true);
+	}
+
+	/* Player Movement */
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS && p.getCanMove()) {
+		p.setCanMove(false);
+		p.setY(p.getY() + 100);
+	}
+	else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_RELEASE) {
+		p.setCanMove(true);
+	}
+}
+
+void Game::mousePosition(GLFWwindow* window, double xpos, double ypos) {
+	Game::mouseX = xpos;
+	Game::mouseY = ypos;
+}
+
+void Game::mousePress() {
+	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS && canMousePress) {
+		std::cout << "Hello" << std::endl;
+		canMousePress = false;
+	} else if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_RELEASE) {
+		canMousePress = true;
+	}
+}
+
+/**********************************************************************************/
+
 void Game::render() {
 	glColor3f(0.f, 0.f, 0.f);
 
@@ -40,12 +82,8 @@ void Game::render() {
 
 void Game::tick() {
 	p.tick();
-}
 
-void Game::keyInput() {
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-		glfwSetWindowShouldClose(window, true);
-	}
+	if (leftClick == GLFW_PRESS) std::cout << "Click" << std::endl;
 }
 
 void Game::runGameLoop() {
@@ -56,6 +94,7 @@ void Game::runGameLoop() {
 		glMatrixMode(GL_MODELVIEW);
 
 		keyInput();
+		mousePress();
 
 		render();
 
@@ -87,6 +126,8 @@ void Game::startGame() {
 		return;
 	}
 	setUpWindow(window);
+
+	glfwSetCursorPosCallback(window, mousePosition);
 
 	runGameLoop();
 }

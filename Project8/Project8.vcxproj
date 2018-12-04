@@ -130,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\entities\entity.h" />
+    <ClInclude Include="src\entities\entityIDs.h" />
     <ClInclude Include="src\entities\player.h" />
     <ClInclude Include="src\main\game.h" />
     <ClInclude Include="src\utilities\shapes.h" />

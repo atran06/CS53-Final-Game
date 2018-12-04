@@ -41,5 +41,8 @@
     <ClInclude Include="src\utilities\shapes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\entities\entityIDs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

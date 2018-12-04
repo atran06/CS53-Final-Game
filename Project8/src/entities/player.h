@@ -3,9 +3,15 @@
 #include "entity.h"
 
 class Player : public Entity {
+	private:
+		bool canMove = true;
+
 	public:
-		Player(int x = 0, int y = 0);
+		Player(float x = 0, float y = 0);
 		void render();
 		void tick();
+
+		bool getCanMove() { return this->canMove; }
+		void setCanMove(bool canMove) { this->canMove = canMove; }
 
 };

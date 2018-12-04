@@ -1,6 +1,6 @@
 #include "player.h"
 
-Player::Player(int x, int y) {
+Player::Player(float x, float y) {
 	this->x = x;
 	this->y = y;
 
@@ -9,6 +9,9 @@ Player::Player(int x, int y) {
 
 	this->width = 100;
 	this->height = 100;
+
+	this->id = player;
+	this->name = "";
 }
 
 void Player::render() {
